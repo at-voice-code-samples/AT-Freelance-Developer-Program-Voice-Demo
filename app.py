@@ -1,7 +1,9 @@
 import os
 from flask import Flask, request, render_template
+from flask_api import status
 
 app = Flask(__name__)
+
 
 def entry_phrase():
     response = '<?xml version="1.0"?>'
@@ -15,6 +17,7 @@ def entry_phrase():
 
     return response
 
+
 def success_flow():
     response = '<?xml version="1.0"?>'
     response += '<Response>'
@@ -24,6 +27,7 @@ def success_flow():
     response += '</Response>'
 
     return response
+
 
 def error_flow_too_high():
     response = '<?xml version="1.0"?>'
@@ -35,6 +39,7 @@ def error_flow_too_high():
 
     return response
 
+
 def error_flow_too_low():
     response = '<?xml version="1.0"?>'
     response += '<Response>'
@@ -42,6 +47,7 @@ def error_flow_too_low():
     response += 'Hi, sorry, thats not quite it. Guess a little higher. Call back to try again. Goodbye.'
     response += '</Say>'
     response += '</Response>'
+
 
 def error_flow():
     response = '<?xml version="1.0"?>'
@@ -51,20 +57,20 @@ def error_flow():
     response += '</Say>'
     response += '</Response>'
 
-@app.route('/', methods=["GET","POST"])
+
+@app.route('/', methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        return render_template("index.html")
+        return 'Everything is ok!', status.HTTP_200_OK
     elif request.method == "POST":
         return entry_phrase()
     else:
-        return render_template("error.html")
+        return 'I think something is up', status.HTTP_400_BAD_REQUEST
 
 
-@app.route('/voice/say', methods=["GET","POST"])
+@app.route('/voice/say', methods=["GET", "POST"])
 def say_func():
     digits = request.values.get("dtmfDigits")
-    usable_digits = int(digits)
     print(digits)
 
     if digits == 9:
@@ -74,7 +80,7 @@ def say_func():
     elif digits < 9:
         return error_flow()
     else:
-        return 
+        return 'I think something is up', status.HTTP_400_BAD_REQUEST
 
 
 if __name__ == "__main__":
