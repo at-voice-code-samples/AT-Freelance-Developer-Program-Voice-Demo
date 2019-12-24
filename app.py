@@ -12,7 +12,7 @@ def entry_phrase():
     response += '<Play url="http://197.248.0.197:8081/ad846fec309505710462e90a4b48bcb7.mp3">'
     response += '</Play>'
     response += '</GetDigits>'
-    response += '<Say>Hi, welcome to the Africas Talking Freelance Developer Program demo app. We have a little question for you. How old is Africas Talking? Dial in your guess and press hash'
+    #response += '<Say>Hi, welcome to the Africas Talking Freelance Developer Program demo app. We have a little question for you. How old is Africas Talking? Dial in your guess and press hash</Say>'
     response += '</Response>'
 
     return response
