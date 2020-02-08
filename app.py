@@ -73,11 +73,11 @@ def say_func():
     digits = request.values.get("dtmfDigits")
     print(digits)
 
-    if digits == 9:
+    if digits == "9":
         return success_flow()
-    elif digits > 9:
+    elif digits > "9":
         return error_flow_too_high()
-    elif digits < 9:
+    elif digits < "9":
         return error_flow()
     else:
         return 'I think something is up', status.HTTP_400_BAD_REQUEST
